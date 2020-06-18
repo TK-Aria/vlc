@@ -25,6 +25,13 @@ jobs:
       fetchDepth: 1
       submodules: recursive
 
+    - task: PublishBuildArtifacts@1
+      displayName: 'postprocess: Artifact Project'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)/extras'
+        ArtifactName: 'developmennt project'
+        publishLocation: 'Container'
+
     - task: CmdLine@2
       displayName: Download Library
       inputs:
@@ -32,6 +39,7 @@ jobs:
           mkdir build
           cd build
           VLC_CONFIGURE_ARGS="--enable-debug --disable-optimizations"  ../extras/package/macosx/build.sh -C .
+          cd ../
           exit 0
 
     - task: PublishBuildArtifacts@1
