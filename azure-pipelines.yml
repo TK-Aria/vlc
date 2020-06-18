@@ -25,13 +25,6 @@ jobs:
       fetchDepth: 1
       submodules: recursive
 
-    - task: PublishBuildArtifacts@1
-      displayName: 'postprocess: Artifact Project'
-      inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)/extras'
-        ArtifactName: 'developmennt project'
-        publishLocation: 'Container'
-
     - task: CmdLine@2
       displayName: Download Library
       inputs:
@@ -45,8 +38,15 @@ jobs:
           exit 0
 
     - task: PublishBuildArtifacts@1
-      displayName: 'postprocess: Artifact Project'
+      displayName: 'postprocess: Artifact Binary'
       inputs:
         PathtoPublish: '$(Build.SourcesDirectory)/build'
+        ArtifactName: 'developmennt project'
+        publishLocation: 'Container'   
+ 
+    - task: PublishBuildArtifacts@1
+      displayName: 'postprocess: Artifact Project'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)'
         ArtifactName: 'developmennt project'
         publishLocation: 'Container'
