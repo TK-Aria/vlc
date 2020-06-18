@@ -1,0 +1,42 @@
+trigger:
+- master
+
+#schedules:
+#- cron: "15 1 * * 1-5"
+#  displayName: report everyweek. 
+#  branches:
+#    include:
+#    - master
+#  always: true
+
+#variables:
+#  VALUE: "hoge"
+
+jobs:
+
+  # build.
+  - job: build
+    displayName: build
+    pool:
+      vmImage: 'macos-latest' # 'windows-latest' 'ubuntu-latest'
+
+    steps:
+    - checkout: self
+      fetchDepth: 1
+      submodules: recursive
+
+    - task: CmdLine@2
+      displayName: Download Library
+      inputs:
+        script: |
+          mkdir build
+          cd build
+          VLC_CONFIGURE_ARGS="--enable-debug --disable-optimizations"  ../extras/package/macosx/build.sh -C .
+          exit 0
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'postprocess: Artifact Project'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)/build'
+        ArtifactName: 'developmennt project'
+        publishLocation: 'Container'
