@@ -43,10 +43,4 @@ jobs:
         PathtoPublish: '$(Build.SourcesDirectory)/build'
         ArtifactName: 'developmennt project'
         publishLocation: 'Container'   
- 
-    - task: PublishBuildArtifacts@1
-      displayName: 'postprocess: Artifact Project'
-      inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)'
-        ArtifactName: 'developmennt project'
-        publishLocation: 'Container'
+
