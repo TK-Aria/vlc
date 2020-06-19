@@ -33,14 +33,14 @@ jobs:
           cd build
           ls
           pwd
-          VLC_CONFIGURE_ARGS="--enable-debug --disable-optimizations"  ../extras/package/macosx/build.sh -C .
+          VLC_CONFIGURE_ARGS="--enable-debug --disable-optimizations"  ../extras/package/macosx/build.sh -C $(Build.ArtifactStagingDirectory)
           cd ../
           exit 0
 
     - task: PublishBuildArtifacts@1
       displayName: 'postprocess: Artifact Binary'
       inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)/build'
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'developmennt project'
         publishLocation: 'Container'   
 
